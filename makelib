@@ -1,0 +1,29 @@
+#!/bin/sh
+cd APP
+make
+cd ../LIBDB
+make
+cd ../SYS
+make
+cd ../DRV
+make
+
+#cd ../LIB
+#arm-elf-ar -x libsqlite3.a
+#arm-elf-ar -x libJspInterface.a
+
+cd ..
+rm libskpc.a
+arm-elf-ar rv libskpc.a ./APP/*.o ./APP/YWXML/*.o ./APP/SERVXML/*.o ./APP/JSKMANAGE/*.o ./SYS/*.o ./LIBDB/*.o ./DRV/*.o 
+#rm ./LIB/*.o
+
+rm ar.mac
+echo OPEN libskpc.a > ar.mac
+echo ADDLIB ./LIB/libsqlite3.a >> ar.mac
+echo ADDLIB ./LIB/libJspInterface.a >> ar.mac
+echo ADDLIB ./LIB/libz.a >> ar.mac
+echo SAVE >> ar.mac
+echo END >> ar.mac
+ar -M < ar.mac
+
+cp libskpc.a ../CJ_APE4000R_ZL_1.0000/LIB/
