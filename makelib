@@ -26,4 +26,4 @@ echo SAVE >> ar.mac
 echo END >> ar.mac
 ar -M < ar.mac
 
-cp libskpc.a ../APE4000R_ZL/LIB/
+cp libskpc.a ../CJ_APE4000R_ZL_1.0000/LIB/
