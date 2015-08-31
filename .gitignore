@@ -1,0 +1,41 @@
+#exclude .o File
+*.o
+#ignore .a files
+*.a
+*.elf
+*.elf2flt
+*.mac
+*.tmp
+*.gdb
+*.m4
+*.bak
+*.ncb
+*.opt
+config.h
+*.in
+*.in~
+*.log
+*.status
+configure
+COPYING
+depcomp
+FCR.BIN
+INSTALL
+install-sh
+Makefile
+missing
+stamp-h1
+#exclude folder
+.deps/
+autom4te.cache/
+awe4000r
+*.dsw
+*.dsp
+*.positions
+*.ncb
+*.opt
+/VersionConfig.h
+/Makefile.am
+LIB/pinyin_gb18030.bin
+LIB/Makefile.am
+
