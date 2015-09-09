@@ -497,7 +497,7 @@ UINT8 CUniversialSerialCommunicate::sqslcx(){
 	DBG_PRINT(("fplxdm = %s", (INT8 *)request.fplxdm));
 	DBG_PRINT(("jqbh = %s", (INT8 *)request.jqbh));
 
-	CDataTax taxArray[MAX_TAX_NUM];
+	CTax taxArray[MAX_TAX_NUM+1];
 	UINT8 taxNum;
 	g_YwXmlArg->m_nsrsbh = (INT8 *)(request.nsrsbh);
 	g_YwXmlArg->m_sksbbh = (INT8 *)(request.skpbh);
@@ -1144,7 +1144,7 @@ UINT8 CUniversialSerialCommunicate::skpbspzhcz(){
 	DBG_PRINT(("汇总信息 = %s ", (INT8 *)request.hzxx));
 	memcpy(request.qtxx, m_serialProtocol->m_revCmd->revData+offset, ZH_QTXX_LEN);
 	offset += ZH_QTXX_LEN;
-	DBG_PRINT(("汇总信息 = %s ", (INT8 *)request.qtxx));
+	DBG_PRINT(("其他信息 = %s ", (INT8 *)request.qtxx));
 
 	memcpy(request.jqbh, m_serialProtocol->m_revCmd->revData+offset, JQBH_LEN);
 	offset += JQBH_LEN;
@@ -1158,6 +1158,10 @@ UINT8 CUniversialSerialCommunicate::skpbspzhcz(){
 	g_YwXmlArg->m_bspkl = (INT8 *)(request.bspkl);
 	g_YwXmlArg->m_fplxdm = (INT8 *)(request.fplxdm);
 	g_YwXmlArg->m_jqbh = (INT8 *)(request.jqbh);
+
+	string  strTime("");
+	strTime=(INT8 *)(request.qtxx);
+	DBG_PRINT(("strTime= %s",strTime.c_str()));
 
 	DBG_PRINT(("jzlx= %u",jzlx));
 	if (jzlx ==SKPBSP_CZLX_SJCB)
@@ -1179,8 +1183,8 @@ UINT8 CUniversialSerialCommunicate::skpbspzhcz(){
 	else if (jzlx ==SKPBSP_CZLX_JZSZ)
 	{
 		//4：校准税控设备时钟
-		strErr = "金税盘不支持该操作";
-		ret = FAILURE;
+		//strErr = "金税盘不支持该操作";
+		ret = manageFunc.UpdateClockProc(*g_YwXmlArg,strTime,strErr);
 	}
 
 	if (SUCCESS != ret)
@@ -1809,6 +1813,9 @@ UINT8 CUniversialSerialCommunicate::wlcswh(){
 	DBG_PRINT(("request.ftp_username = %s", request.ftp_username));
 	DBG_PRINT(("request.ftp_passwd = %s", request.ftp_passwd));
 
+	string  strFTP = (INT8 *)request.ftp_serverip;
+	DBG_PRINT(("strFTP= %s",strFTP.c_str()));
+
 	if (0 == request.isdhcp)
 	{
 		if (0 >= if_a_string_is_a_valid_ipv4_address((INT8 *)(request.local_ip)))
@@ -1836,7 +1843,7 @@ UINT8 CUniversialSerialCommunicate::wlcswh(){
 			m_serialProtocol->Rsp_ERR("server_ipaddr is unvalid");
 			return FAILURE;
 		}
-		if (0 >= if_a_string_is_a_valid_ipv4_address((INT8 *)(request.ftp_serverip)))
+		if ((0 >= if_a_string_is_a_valid_ipv4_address((INT8 *)(request.ftp_serverip)))&&(strFTP !=""))
 		{
 			m_serialProtocol->Rsp_ERR("ftp_serverip is unvalid");
 			return FAILURE;
@@ -2383,7 +2390,7 @@ UINT8 CUniversialSerialCommunicate::hqlxsj(){
 	memset(tempbuf, 0x00, sizeof(tempbuf));
 	sprintf(tempbuf, "%.2f", (double)(wscfpljje/100.0));
 	DBG_PRINT(("wscfpljje = %s", tempbuf));
-	m_serialProtocol->FillParament(tempbuf, JE_LEN);
+	m_serialProtocol->FillParament(tempbuf, LJJE_LEN);
 
 	//上传张数
 	memset(tempbuf, 0x00, sizeof(tempbuf));
@@ -2496,7 +2503,7 @@ UINT8 CUniversialSerialCommunicate::getErrUpInv()
 
 	if(nCount <= 0)
 	{
-		strErr = "无上传错误发票信息;";
+		strErr = "无上传错误发票信息";
 		m_serialProtocol->Rsp_ERR(strErr);
 		return FAILURE;
 	}

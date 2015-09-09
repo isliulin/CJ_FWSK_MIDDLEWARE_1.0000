@@ -76,8 +76,8 @@ INT32 CSkpBsp::XmlParse(XMLParse *parse, UINT8 &Czlx, string &Hzxx, string &Qtxx
 	DBG_PRINT(("Hzxx == %s", Hzxx.c_str()));	
 
 	parse->LocateNodeByName(parse->m_parentElement[2], "qtxx");
-//	Qtxx = parse->GetText().c_str();	
-	Qtxx = "";	//仅数据抄报有效，用于抄报发票领用存信息（此字段目前不用，给空值。）
+	Qtxx = parse->GetText();	// 4：校准税控设备时钟 填充修改金税盘时钟
+//	Qtxx = "";	//仅数据抄报有效，用于抄报发票领用存信息（此字段目前不用，给空值。）
 	DBG_PRINT(("Qtxx == %s", parse->GetText().c_str()));	
 
 	return SUCCESS;
@@ -118,7 +118,7 @@ INT32 CSkpBsp::Execute()
 	XmlParse(m_pXmlParse, czlx, strHzxx, strQtxx);
 	CheckYWXmlPara(retInfo.m_retMsg);
 
-	retcode = CJSKDeclareProc::SKPBSP_Proc(m_ywxml_gy.m_fplxdm, czlx, retInfo.m_retMsg);
+	retcode = CJSKDeclareProc::SKPBSP_Proc(m_ywxml_gy.m_fplxdm, czlx, strQtxx,retInfo.m_retMsg);
 	if(retcode != JSK_SUCCESS)
 	{
 		memset(tmpbuf, 0, sizeof(tmpbuf));

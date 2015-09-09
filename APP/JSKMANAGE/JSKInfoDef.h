@@ -24,6 +24,7 @@
 #define GET_OFF_LIMIT_INFO					0X14    //获取金税盘离线控制参数
 #define JSP_PASSWORD_MANAGE				    0X16	//金税盘(证书)口令管理
 #define BSP_REGISTER                        0X17    //报税盘注册
+#define UPDATE_JSK_CLOCK                    0X18    //修改金税盘时钟
 #define UPDATE_CORP_INFO					0X03    //更新企业信息
 #define READ_CORP_INFO                      0X10    //读取企业信息
 #define SET_UPLOAD_FLAG                     0X11    //设置发票上传状态
@@ -34,12 +35,12 @@
 #define MAKE_INVOICE_FUN					0X07    //开票
 #define INVOICE_WASTE_FUN					0X09    //已开票作废
 #define GET_CUR_INVIOCE_INFO				0X08    //获取当前发票号信息
-#define HOST_TO_INVVOL						0X0a    //主机分票
-#define INVVOL_RET_INFO						0X0b    //发票退回（主分机一样）
-#define HOST_GET_INVVOL						0X0c    //主机读入分机退回发票
-#define GET_INVIOCE_INFO						0X0f    //发票查询
+#define HOST_TO_INVVOL						0X0A    //主机分票
+#define INVVOL_RET_INFO						0X0B    //发票退回（主分机一样）
+#define HOST_GET_INVVOL						0X0C    //主机读入分机退回发票
+#define GET_INVIOCE_INFO					0X0F    //发票查询
 #define GET_LOCK_DATE				    	0X19    //锁死日期
-#define GET_MONTH_COUNT_DATE				0X1a    //查询月统计数据
+#define GET_MONTH_COUNT_DATE				0X1A    //查询月统计数据
 
 
 #define JSK_FP_JZLX_BSP			1			//报税盘
@@ -49,6 +50,7 @@
 #define NEWLINE_COMMAND  "\n"
 #define INVKIND_NAME  'c'
 
+#define JSK_UPDATE_CLOCK                        7      //修改金税盘时钟长度
 #define JSK_PASSWORD_LEN                        9      //金税盘前口令(9)
 #define JSK_PASSWORD_SUM_LEN                    18      //金税盘前口令(9)+新口令(9)
 #define JSK_NET_GET_INV_LEN                     16      //网络购票申请信息
@@ -75,7 +77,7 @@
 
 #define INVVOL_MAX_NUM  100            //发票卷最大条数
 #define INVKIND_MAX_NUM 10              //发票种类最大条数
-#define MAX_TAX_NUM			10			//最大税率个数
+#define MAX_TAX_NUM		20			//最大税率个数
 
 #define MAX_SKSBBH_LEN		12			//税控设备编号长度
 #define MAX_SKSBKL_LEN		8			//税控设备口令长度

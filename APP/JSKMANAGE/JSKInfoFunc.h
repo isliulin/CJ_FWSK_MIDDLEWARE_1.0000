@@ -312,6 +312,13 @@ public:
 	static INT32 BSPRegister(string &strErr);
 
 	/*!
+	@brief 修改金税盘时钟
+	@param[in]  JSPClock 修改时间字符串“20150909113102”
+	@param[out] string &strErr 错误信息
+	@return 如果不成功，返回错误号及错误描述；成功，返回JSK_SUCCESS
+	*/
+	static INT32 UpdateJSPClock(UINT8* JSPClock, string &strErr);
+	/*!
 	@brief 更新企业信息  
 	@param[in] UINT8* UpCorpInfo, INBUFF[] 为通过网络从处理获取的权限信息(密文)
 	@param[out] string &strErr 错误信息

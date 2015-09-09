@@ -50,10 +50,11 @@ public:
 	@brief 税控设备报税盘组合操作
 	@param[in] fplxdm 发票类型代码
 	@param[in] czlx 操作类型
+	@param[in] qtxx  其他信息
 	@param[out] strErr   错误信息
 	@return  1 SUCCESS； 0  FAILURE
 	*/
-	static INT32 SKPBSP_Proc(string fplxdm, UINT8 czlx, string &strErr);
+	static INT32 SKPBSP_Proc(string fplxdm, UINT8 czlx, string qtxx,string &strErr);
 
 	static INT32 DeclareAuthority(string &strErr);
 

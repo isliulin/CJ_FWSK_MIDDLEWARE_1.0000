@@ -119,7 +119,7 @@ INT32 CJSKDeclareProc::JKHC_Proc(string fplxdm, string strFpjkmw, string &strErr
 	return JSK_SUCCESS;
 }
 
-INT32 CJSKDeclareProc::SKPBSP_Proc(string fplxdm, UINT8 czlx, string &strErr)
+INT32 CJSKDeclareProc::SKPBSP_Proc(string fplxdm, UINT8 czlx,string qtxx, string &strErr)
 {
 	INT32 retcode = 0;
 	UINT8 fplx;
@@ -143,6 +143,7 @@ INT32 CJSKDeclareProc::SKPBSP_Proc(string fplxdm, UINT8 czlx, string &strErr)
 	case SKPBSP_CZLX_FXGPXX:	//反写购票信息
 		break;
 	case SKPBSP_CZLX_JZSZ:		//校准税控设备时钟
+		retcode = CJSKInfoFunc::UpdateJSPClock((UINT8 *)qtxx.c_str(), strErr);
 		break;
 	default:
 		break;
