@@ -60,6 +60,16 @@ INT32 CJSKMakeInvoice::FPKJ_Proc(CDataInvHead *pInvhead, string &strErr, UINT8 w
 	UINT8 tmpBuf[16];
 	INT8 sqlbuf[128];
 
+	//获取可滚动表的记录数
+    UINT8 nIfRolled=0;
+	retcode = g_globalArgLib->RollData(nIfRolled);
+	if(retcode!= SUCCESS)
+	{
+		strErr = "中间件数据库滚动失败!";
+		DBG_PRINT((" Roll() error !"));
+		return JSK_FAILURE;	
+	}
+
 	if(wasteflag == 0)
 	{
 		DBG_PRINT(("kplx = %u", pInvhead->m_kplx));
