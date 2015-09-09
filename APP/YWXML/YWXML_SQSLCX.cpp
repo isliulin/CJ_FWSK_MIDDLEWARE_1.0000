@@ -117,7 +117,7 @@ INT32 CSqslcx::XmlBuild(XMLConstruct *construct, CTax *pTax, UINT8 slNum, Return
 
 INT32 CSqslcx::Execute()
 {
-	CTax tax[MAX_TAX_NUM];
+	CTax tax[MAX_TAX_NUM+1];
 	Return_Info retInfo;
 	INT32 retcode = 0;
 	INT8 tmpbuf[64];

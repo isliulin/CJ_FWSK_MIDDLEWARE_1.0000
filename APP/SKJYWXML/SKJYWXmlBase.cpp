@@ -175,7 +175,7 @@ INT32 CSKJYWXmlBase::NETXml_Proc(string &strErr)
 	fclose(fp);
 	sInputInfo = tmpBuff;
 	
-	OperateNet((char *)m_pin.c_str(),m_servip, m_servport, m_servpath,(char *)m_servId.c_str(), m_nsrsbh, sInputInfo, sOutputInfo, m_Err);
+	OperateNet((char *)m_pin.c_str(),m_servip, m_servport, m_servpath,(char *)m_servId.c_str(), m_nsrsbh, sInputInfo, sOutputInfo, strErr);
 	
 	//接收数据写文件
 	memset(tmpBuff, 0, sizeof(tmpBuff));

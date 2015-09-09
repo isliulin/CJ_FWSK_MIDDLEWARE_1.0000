@@ -38,4 +38,4 @@ awe4000r
 /Makefile.am
 LIB/pinyin_gb18030.bin
 LIB/Makefile.am
-
+!libJspInterface.a

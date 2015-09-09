@@ -19,7 +19,7 @@
 #define XML_BUSINESS_ID		"id"
 
 
-#define MAX_TAX_NUM			10
+#define MAX_TAX_NUM			20
 #define INVVOL_MAX_NUM  100            //发票卷最大条数20150519linzihao
 
 
